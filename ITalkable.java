@@ -6,7 +6,3 @@
    Person: 人間
    Animal: 動物(予定)
    Monster: 魔物(予定) */
-public interface ITalkable {
-  void talkTo(ITalkable other, String ... args);
-  void answerTo(ITalkable other, String[] args);
-}

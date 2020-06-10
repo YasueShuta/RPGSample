@@ -7,8 +7,8 @@
  * Childs:
    Character: ゲーム内に登場する人物 */
 public class Person
-  extends Speaker
-  implements ITalkable
+//  extends Speaker
+//  implements ITalkable
 {
   /* プロパティ */
   protected String _name = "";
@@ -28,20 +28,16 @@ public class Person
   public int age() {
     return _age;
   }
+  public void print(Object message) {
+    String msg = String.format("[%s] ", prefix());
+    System.out.print(msg);
+    System.out.println(message);
+  }
   public void hello_to(Person other) {
     hello(other);
     say_name_age();
     other.hello(this);
     other.say_name_age();
-  }
-  public void talkTo(ITalkable other, String ... args) {
-    print("こんにちは.");
-    other.answerTo(this, args);
-  }
-  public void answerTo(ITalkable other, String[] args) {
-    for (String s : args) {
-      print(s);
-    }
   }
 
   /* 非公開メソッド */
