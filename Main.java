@@ -1,11 +1,11 @@
 class Main {
-/* 
+ /*
   static void test() {
-    BattleCharacter hero = new BattleCharacter("勇者", 15, 100, 100);
-    BattleCharacter maou = new BattleCharacter("魔王", 300, 300, 5000);
+    BattleCharacter hero = new BattleCharacter("勇者", 15, "Hero", 50, 100, 100);
+    BattleCharacter satan = new BattleCharacter("魔王", 300, "Satan", 100, 300, 5000);
 
-    hero.attack(maou);
-    maou.attack(hero, 300);
+    hero.attack(satan);
+    satan.attack(hero, 300);
   }
 */
 
