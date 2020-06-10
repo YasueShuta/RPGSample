@@ -1,7 +1,6 @@
 /* Person.java: (演習9-1)人間クラス
  * Interface:
    IPrintable:(継承)会話文を出力
-   ITalkable: 会話可能
  * Parent:
    Speaker
  * Childs:
