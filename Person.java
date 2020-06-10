@@ -7,7 +7,6 @@
    Character: ゲーム内に登場する人物 */
 public class Person
 //  extends Speaker
-//  implements ITalkable
 {
   /* プロパティ */
   protected String _name = "";
