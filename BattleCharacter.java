@@ -1,14 +1,15 @@
 /* Person.java: (演習9-3)戦闘可能な登場人物クラス
  * Interface:
    IPrintable:(継承)会話文を出力
-   ITalkable: (継承)会話可能
    IBattlable: 戦闘可能
+ * Parent:
+   Character
  * Childs:
    Hero: 勇者(予定)
    Wizard: 魔法使い(予定)
    Priest: 僧侶(予定) */
 public class BattleCharacter
-  extends Person
+  extends Character
   implements IBattlable
 {
   /* プロパティ */
@@ -18,11 +19,11 @@ public class BattleCharacter
   int _mp;
 
   /* コンストラクタ */
-  public BattleCharacter(String name, int age) {
-    this(name, age, 100, 0);
+  public BattleCharacter(String name, int age, String _class, int level) {
+    this(name, age, _class, level, 100, 0);
   }
-  public BattleCharacter(String name, int age, int hp, int mp) {
-    super(name, age);
+  public BattleCharacter(String name, int age, String _class, int level, int hp, int mp) {
+    super(name, age, _class, level);
     _maxhp = hp;
     _maxmp = mp;
     _hp = _maxhp;

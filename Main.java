@@ -1,10 +1,24 @@
+import java.util.*;
+
 class Main {
   static void test() {
-    BattleCharacter hero = new BattleCharacter("勇者", 15, 100, 100);
-    BattleCharacter maou = new BattleCharacter("魔王", 300, 300, 5000);
+    ArrayList<IBattlable> b = new ArrayList<>();
 
-    hero.attack(maou);
-    maou.attack(hero, 300);
+    BattleCharacter hero = new BattleCharacter("勇者", 15, "Hero", 1, 100, 100);
+    BattleCharacter satan = new BattleCharacter("魔王", 300, "Satan", 100, 300, 5000);
+    b.add(hero);
+    b.add(satan);
+
+    BattleCharacter tmp = (BattleCharacter)b.get(0);
+    tmp.levelup(49);
+
+    for (IBattlable i : b) {
+      Character c = (Character)i;
+      Printer.println(c.name()+"のレベルは"+c.level());
+    }
+
+    hero.attack(satan);
+    satan.attack(hero, 300);
   }
   public static void main(String[] args) {
     System.out.println("Hello world!");

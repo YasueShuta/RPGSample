@@ -8,7 +8,6 @@
    Character: ゲーム内に登場する人物 */
 public class Person
   extends Speaker
-  implements ITalkable
 {
   /* プロパティ */
   protected String _name = "";
@@ -33,15 +32,6 @@ public class Person
     say_name_age();
     other.hello(this);
     other.say_name_age();
-  }
-  public void talkTo(ITalkable other, String ... args) {
-    print("こんにちは.");
-    other.answerTo(this, args);
-  }
-  public void answerTo(ITalkable other, String[] args) {
-    for (String s : args) {
-      print(s);
-    }
   }
 
   /* 非公開メソッド */
