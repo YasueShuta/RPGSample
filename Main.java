@@ -14,5 +14,7 @@ class Main {
     Person hime = new Person("Hime", 19);
 
     taro.hello_to(hime);
+
+    // test();
   }
 }
