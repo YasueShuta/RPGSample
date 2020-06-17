@@ -9,7 +9,7 @@
    Wizard: 魔法使い(予定)
    Priest: 僧侶(予定) */
 public class BattleCharacter
-  extends Character
+  extends MyCharacter
   implements IBattlable
 {
   /* プロパティ */
