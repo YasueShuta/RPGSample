@@ -10,10 +10,21 @@ public class PlayableAdapterSample implements IMovable, IPlayable {
 	// プロパティの例
 	protected String _name;
 	
+	public PlayableAdapterSample(String name) {
+		this(CharaImageFile.YOUNG_MAN, ShadowImageFile.DEFAULT);
+	}
+	public PlayableAdapterSample(String name, String srcname, String shadowname) {
+		this(name, srcname, shadowname, false);
+	}
 	public PlayableAdapterSample(String name, String srcname, String shadowname, boolean playable) {
 		_name = name;
+		
+		initHandle(srcname, shadowname, playable);
+	}
 
-		// ここからIMovable, IPlayable適用のための初期化
+	// オーバーライドは_handle経由で実装済み
+	private void initHandle(String srcname, String shadowname, boolean playable) {
+		// IMovable, IPlayable適用のための初期化
 		_playable = playable;
 		
 		if (playable) {
@@ -22,8 +33,7 @@ public class PlayableAdapterSample implements IMovable, IPlayable {
 			_handle = new MoveHandle(srcname, shadowname);
 		}
 	}
-
-	// オーバーライドは_handle経由で実装済み
+	
 	@Override
 	public void draw(Graphics g) {
 		_handle.draw(g);
