@@ -71,7 +71,7 @@ public class CrossButtonPanel extends JPanel {
 		add(b_down, gbc);
 
 		// 決定ボタン
-		JButton b_center = new JButton("〇");
+		JButton b_center = new JButton("O");
 		b_center.setActionCommand(ButtonCommand.ENTER);
 		b_center.addActionListener(lsnr);
 		gbc.gridx = 1;
@@ -79,7 +79,7 @@ public class CrossButtonPanel extends JPanel {
 		add(b_center, gbc);
 
 		// キャンセルボタン
-		JButton b_cancel = new JButton("×");
+		JButton b_cancel = new JButton("X");
 		b_cancel.setActionCommand(ButtonCommand.CANCEL);
 		b_cancel.addActionListener(lsnr);
 		gbc.gridx = 2;

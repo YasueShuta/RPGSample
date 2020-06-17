@@ -34,9 +34,10 @@ class Main {
   }
   
   static void demo() {
-	  App app = new App("デモ");
+	  App app = new App("Demo");
 	  
-	  app.textWindow.setText("ボタンか矢印キーで移動可能");
+	  app.textWindow.print_("Move by button or arrow keys.\n");
+    app.textWindow.println("H: set initial position.");
 	  
 	  // Movableなキャラクターの表示
 	  MoveHandle m = new MoveHandle(
