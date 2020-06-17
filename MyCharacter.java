@@ -6,7 +6,7 @@
    Person
  * Childs:
    BattleCharacter: 戦闘可能な登場人物 */
-public abstract class Character
+public abstract class MyCharacter
     extends Person
 {
   /* プロパティ */
@@ -14,7 +14,7 @@ public abstract class Character
   public int _level;
 
   /* コンストラクタ */
-  public Character(String name, int age, String _class, int level) {
+  public MyCharacter(String name, int age, String _class, int level) {
     super(name, age);
     this._class = _class;
     _level = level;
