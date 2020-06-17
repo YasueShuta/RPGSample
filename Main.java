@@ -1,4 +1,6 @@
 import java.util.*;
+/* enshu10-1: TODO */
+import animation.*;
 
 class Main {
   static void test() {
@@ -21,6 +23,7 @@ class Main {
     satan.attack(hero, 300);
   }
   public static void main(String[] args) {
-    test();
+    //test();
+    DemoWindow.main(args);
   }
 }
