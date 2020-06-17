@@ -1,6 +1,6 @@
 import java.util.*;
 /* enshu10-1: TODO */
-import animation.*;
+//import animation.*;
 
 class Main {
   static void test() {
@@ -24,6 +24,7 @@ class Main {
   }
   public static void main(String[] args) {
     //test();
-    DemoWindow.main(args);
+    /* enshu10-1: TODO */
+    //DemoWindow.main(args);
   }
 }
