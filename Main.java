@@ -1,4 +1,3 @@
-import java.util.*;
 /* enshu10-1: TODO */
 //import animation.*;
 
