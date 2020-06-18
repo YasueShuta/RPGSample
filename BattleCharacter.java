@@ -23,7 +23,13 @@ public class BattleCharacter
     this(name, age, _class, level, 100, 0);
   }
   public BattleCharacter(String name, int age, String _class, int level, int hp, int mp) {
-    super(name, age, _class, level);
+    this(name, age, _class, level, hp, mp, "001", "001");
+  }
+  public BattleCharacter(String name, int age, String _class, int level, int hp, int mp, String srcname, String shadowname) {
+    this(name, age, _class, level, hp, mp, srcname, shadowname, false);
+  }
+  public BattleCharacter(String name, int age, String _class, int level, int hp, int mp, String srcname, String shadowname, boolean playable) {
+    super(name, age, _class, level, srcname, shadowname, playable);
     _maxhp = hp;
     _maxmp = mp;
     _hp = _maxhp;

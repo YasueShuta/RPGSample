@@ -40,7 +40,7 @@ public class DemoWindow extends AppBase {
 		
 		while (true) {
 			try {
-				Thread.sleep(200);
+				Thread.sleep(500);
 				switch (_state) {
 				case 0:
 					// Wait
