@@ -11,7 +11,7 @@ public class PlayableAdapterSample implements IMovable, IPlayable {
 	protected String _name;
 	
 	public PlayableAdapterSample(String name) {
-		this(CharaImageFile.YOUNG_MAN, ShadowImageFile.DEFAULT);
+		this(name, CharaImageFile.YOUNG_MAN, ShadowImageFile.DEFAULT);
 	}
 	public PlayableAdapterSample(String name, String srcname, String shadowname) {
 		this(name, srcname, shadowname, false);
