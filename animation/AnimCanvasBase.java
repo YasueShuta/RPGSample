@@ -22,10 +22,12 @@ public abstract class AnimCanvasBase extends Canvas implements Runnable {
 	
 	public void setBackground(String name) {
 		BackgroundDrawer bd = new BackgroundDrawer(name);
+		bd.size(w, h);
 		bgimage = bd;
 	}
 	public void setBackground(IDrawable image) {
 		bgimage = image;
+		image.size(w, h);
 	}
 		
 	public void paint(Graphics g) {
@@ -33,13 +35,13 @@ public abstract class AnimCanvasBase extends Canvas implements Runnable {
 			bgimage.draw(g);			
 		}
 		for (IDrawable d : images) {
-			d.draw(g);
+			if (d.isVisible()) d.draw(g);
 		}
 	}
 	public void update(Graphics g) {
-		for (IMovable d : objects) {
-			d.update();
-		}
+//		for (IMovable d : objects) {
+//			d.update();
+//		}
 		super.update(g);
 	}
 	@Override

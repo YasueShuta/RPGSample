@@ -1,5 +1,7 @@
 package animation;
+import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyListener;
 
 public class PlayableAdapterSample implements IMovable, IPlayable {
@@ -180,5 +182,88 @@ public class PlayableAdapterSample implements IMovable, IPlayable {
 			return (PlayableHandle)_handle;
 		}
 		return null;
+	}
+
+	// Characterに追加するメソッド
+	@Override
+	public double scale() {
+		return _handle.scale();
+	}
+	@Override
+	public void scale(double scale) {
+		_handle.scale(scale);
+	}
+	@Override
+	public Dimension size() {
+		return _handle.size();
+	}
+	@Override
+	public void size(int w, int h) {
+		_handle.size(w, h);
+	}
+	@Override
+	public boolean isVisible() {
+		return _handle.isVisible();
+	}
+	@Override
+	public void setVisible(boolean v) {
+		_handle.setVisible(v);
+	}
+	@Override
+	public void start() {
+		_handle.start();
+	}
+	@Override
+	public void start(int duration) {
+		_handle.start(duration);	
+	}
+	@Override
+	public boolean isRunning() {
+		return _handle.isRunning();
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		_handle.actionPerformed(e);
+	}
+	@Override
+	public void turn(int duration, boolean clockwise) {
+		_handle.turn(duration, clockwise);		
+	}
+	@Override
+	public void move(int dx, int dy) {
+		_handle.move(dx, dy);
+	}
+	@Override
+	public void move(int dx, int dy, double speed) {
+		_handle.move(dx, dy, speed);
+	}
+	@Override
+	public void move(int dx, int dy, int duration) {
+		_handle.move(dx, dy, duration);		
+	}
+
+	@Override
+	public void wait(int duration) {
+		_handle.wait(duration);
+	}
+	@Override
+	public void randomWalk() {
+		_handle.randomWalk();
+	}
+	@Override
+	public void randomWalk(int d) {
+		_handle.randomWalk(d);
+	}
+	@Override
+	public void jump() {
+		_handle.jump();
+	}
+	@Override
+	public void forward(int d) {
+		_handle.forward(d);
+	}
+	@Override
+	public void back(int d) {
+		_handle.back(d);
 	}
 }

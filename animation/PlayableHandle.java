@@ -27,24 +27,28 @@ public class PlayableHandle extends MoveHandle implements IPlayable, KeyListener
 		_direction = 0;
 		_state = 1;
 		_vel[1] = v;
+		start();
 	}
 	@Override
 	public void goLeft(double v) {
 		_direction = 1;
 		_state = 1;
 		_vel[0] = -v;
+		start();
 	}
 	@Override
 	public void goUp(double v) {
 		_direction = 2;
 		_state = 1;
 		_vel[1] = -v;
+		start();
 	}
 	@Override
 	public void goRight(double v) {
 		_direction = 3;
 		_state = 1;
 		_vel[0] = v;
+		start();
 	}
 
 	@Override

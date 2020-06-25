@@ -11,6 +11,7 @@ public class SourceImage {
 	
 	protected BufferedImage _src = null;
 
+	public SourceImage() {}
 	public SourceImage(String filename) {
 		try { 
 			_src = ImageIO.read(new File(filename));

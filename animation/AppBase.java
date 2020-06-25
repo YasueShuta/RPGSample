@@ -135,6 +135,8 @@ public abstract class AppBase extends JFrame implements Runnable {
 		if (focus == 0) {
 			if (cmd == ButtonCommand.ENTER) {
 				_state = 1;
+			} else if (cmd == ButtonCommand.CANCEL) {
+				_state = 0;
 			}
 			for (KeyListener lsnr : canvas.getKeyListeners()) {
 				if (cmd != ButtonCommand.CANCEL) {

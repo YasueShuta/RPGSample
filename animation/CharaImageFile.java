@@ -1,6 +1,6 @@
 package animation;
 
-public class CharaImageFile {
+public class CharaImageFile extends ImageFileBase {
 	public static String BASENAME = "img/chara/pipo-charachip";
 	public static String EXT = ".png";
 	
@@ -131,5 +131,8 @@ public class CharaImageFile {
 	public static String THIEF_FEMALEc = "030c";
 	public static String THIEF_FEMALEd = "030d";
 	public static String THIEF_FEMALEe = "030e";
-
+	
+	public static String getFilename(String name) {
+		return getFilename(BASENAME, name, EXT);
+	}
 }

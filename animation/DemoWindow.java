@@ -15,16 +15,16 @@ public class DemoWindow extends AppBase {
 
 		// 移動可能なキャラクターの作成
 		MoveHandle m = new MoveHandle(
-				CharaImageFile.YOUNG_WOMAN,
-				ShadowImageFile.DEFAULT,
+				CharaImageFile.getFilename(CharaImageFile.YOUNG_WOMAN),
+				ShadowImageFile.getFilename(ShadowImageFile.DEFAULT),
 				app.w/3, app.h/3);
 		m.direction("right");
 		app.addMovable(m);
 		
 		// プレイヤーとして操作可能なキャラクターの作成
 		PlayableHandle p = new PlayableHandle(
-				CharaImageFile.YOUNG_MAN,
-				ShadowImageFile.DEFAULT,
+				CharaImageFile.getFilename(CharaImageFile.YOUNG_MAN),
+				ShadowImageFile.getFilename(ShadowImageFile.DEFAULT),
 				app.w/2, app.h/2);
 		app.addPlayable(p);
 		

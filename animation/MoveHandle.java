@@ -1,13 +1,26 @@
 package animation;
 
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
+import java.awt.event.ActionEvent;
+import java.util.Random;
 
-public class MoveHandle extends DrawableCharacterHandle implements IMovable {
+public class MoveHandle extends AnimHandle implements IMovable {
+	static Random rd;
 
+	protected AnimSourceImage _shadow;
 	protected int _px,_py;
+	protected int _z = 0;
+	protected double _dz = 0d;
+	protected int _shadow_y;
 	protected double[] _vel  = {0.0, 0.0};
-	protected double _fps = 5;
+	
+	protected int _direction = 0;
+	protected int _state = 0;
+	protected int _timing = 0;
+	protected String _animation_mode = "walking";
+	
+	private static int[] _timingToX = {1, 0, 1, 2};
+	private static int[] _directionToY = {0, 1, 3, 2};	
 	
 	public MoveHandle() {
 		this(0,0);
@@ -25,45 +38,48 @@ public class MoveHandle extends DrawableCharacterHandle implements IMovable {
 		this(filename, shadowname, 0, 0);
 	}
 	public MoveHandle(String filename, String shadowname, int x, int y) {
-		super(filename, shadowname);
+		this(filename, shadowname, 32, 32, x, y);
+	}
+	public MoveHandle(String filename, String shadowname, int w, int h, int x, int y) {
+		super(w, h, filename);
+		_shadow = new AnimSourceImage(w, h, shadowname);
 		_px = x;
 		_py = y;
+		_shadow_y = (int) (0.075 * h);
+		scale(2d);
+		setTimer(200);
 		home();
 	}
 
 	@Override
 	public String direction() {
-		return IMovable.DIRECTIONS[_direction];
+		return DIRECTIONS[_direction];
 	}
 	@Override
 	public void direction(String d) {
-		if (d == IMovable.DIRECTIONS[0]) {
-			_direction = 0;
-		} else if (d == IMovable.DIRECTIONS[1]) {
-			_direction = 1;
-		} else if (d == IMovable.DIRECTIONS[2]) {
-			_direction = 2;
-		} else if (d == IMovable.DIRECTIONS[3]) {
-			_direction = 3;
+		int i = 0;
+		for (String s : DIRECTIONS) {
+			if (s == d) {
+				_direction = i;
+				return;
+			}
+			i++;
 		}
 	}
 
 	@Override
 	public String state() {
-		return IMovable.STATES[_state];
+		return STATES[_state];
 	}
 	@Override
 	public void state(String s) {
-		if (s == IMovable.STATES[0]) {
-			_state = 0;
-		} else if (s == IMovable.STATES[1]) {
-			_state = 1;
+		int i = 0;
+		for (String t : STATES) {
+			if (t == s) {
+				_state = i;
+			}
+			i++;
 		}
-	}
-
-	@Override
-	public BufferedImage getImage() {
-		return _srcimg.getImage(direction(), _timing);
 	}
 
 	@Override
@@ -80,16 +96,10 @@ public class MoveHandle extends DrawableCharacterHandle implements IMovable {
 		double curspeed = speed();
 		if (curspeed != speed) return;
 		if (curspeed == 0) {
-			// 0:down 1:left 2:up 3:right
-			if (_direction == 0) {
-				_vel[1] = speed;
-			} else if (_direction == 1) {
-				_vel[0] = speed;
-			} else if (_direction == 2) {
-				_vel[1] = - speed;
-			} else if (_direction == 3) {
-				_vel[0] = - speed;
-			}
+			// 0:down(+y) 1:left(-x) 2:up(-y) 3:right(+x)
+			int i = _direction % 2 == 0 ? 1 : 0;
+			int sign = (_direction-1)/2 == 0 ? 1 : -1;
+			_vel[i] = sign * speed;
 			return;
 		}
 		_vel[0] *= speed / curspeed;
@@ -106,52 +116,132 @@ public class MoveHandle extends DrawableCharacterHandle implements IMovable {
 		_vel[0] = vx;
 		_vel[1] = vy;
 	}
+	
+	@Override
+	public void move(int dx, int dy) {
+		move(dx, dy, 50d);
+	}
+	@Override
+	public void move(int dx, int dy, double speed) {
+		double ds = Math.sqrt(dx*dx + dy*dy);
+		move(dx, dy, (int)(1000 * ds / speed));
+	}
+	@Override
+	public void move(int dx, int dy, int duration) {
+		_animation_mode = "walking";
+		_state = 1;
+		double dt = duration / 1000d;
+		velocity(dx/dt, dy/dt);
+		start(duration);
+	}
 
 	@Override
 	public void down(int d) {
 		_direction = 0;
-		_pos[1] += d;
+		move(0, d);
 	}
 	@Override
 	public void left(int d) {
 		_direction = 1;
-		_pos[0] -= d;
+		move(-d, 0);
 	}
-
 	@Override
 	public void up(int d) {
 		_direction = 2;
-		_pos[1] -= d;
+		move(0, -d);
 	}
-
 	@Override
 	public void right(int d) {
 		_direction = 3;
-		_pos[0] += d;
+		move(d, 0);
 	}
-	
 	@Override
-	public void stop() {
-		_timing = 0;
+	public void wait(int duration) {
+		_state = 0;
+		start(duration);
+	}
+	@Override
+	public void stop() {	
 		_vel[0] = 0.0;
 		_vel[1] = 0.0;
-		_state = 0;
+		_state = 0;		
+
+		if (_timer != null && _timer.isRunning()) {
+			_stopTime = -1;
+			_timer.stop();
+		}
+	}
+
+	@Override
+	public void randomWalk() {
+		randomWalk(50);
+	}
+	@Override
+	public void randomWalk(int d) {
+		if (rd == null) rd = new Random();
+		
+		int r = rd.nextInt(8);
+
+		switch(r) {
+		case 0:
+			down(d);
+			break;
+		case 1:
+			left(d);
+			break;
+		case 2:
+			up(d);
+			break;
+		case 3:
+			right(d);
+			break;
+		default:
+			wait(1000);
+			break;
+		}
+	}
+	@Override
+	public void jump() {
+		_animation_mode = "jumping";
+		_dz = _srcimg.h * -1.5;
+		start();
 	}
 
 	@Override
 	public void home() {
 		_pos[0] = _px;
 		_pos[1] = _py;
-	}
-	
+	}	
 	@Override
 	public void home(int px, int py) {
 		_px = px;
 		_py = py;
 		pos(_px, _py);
 	}
-
 	
+	@Override
+	public void forward(int d) {
+		switch(_direction) {
+		case 0: // down
+			down(d);
+			break;
+		case 1: // left
+			left(d);
+			break;
+		case 2: // up
+			up(d);
+			break;
+		case 3: // right
+			right(d);
+			break;
+		default:
+			break;
+		}
+	}
+	@Override
+	public void back(int d) {
+		forward(-d);
+	}
 	@Override
 	public void turnLeft() {
 		double tmp = _vel[0];
@@ -168,35 +258,79 @@ public class MoveHandle extends DrawableCharacterHandle implements IMovable {
 
 		_direction = (_direction + 1) % 4;
 	}
+	@Override
+	public void turn(int duration, boolean clockwise) {
+		_state = 1; // walk
+		_animation_mode = "walking";
+		if (clockwise) {
+			turnRight();
+		} else {
+			turnLeft();
+		}
+		start(duration);
+	}
 
-	
 	@Override
 	public void draw(Graphics g) {
-		int t;
-		if (_state == 0) {
-			t = 0;
-		} else {
-			countup();
-			t = _timing % 4;
+		int x;
+		switch (_state) {
+		case 1:
+			// walk
+			x = _timingToX[_timing % 4];
+			break;
+		case 0:
+			// idle
+		default:
+			x = _timingToX[0];
+			break;
 		}
-		int w = _srcimg.w;
-		int h = _srcimg.h;
+		int y = _directionToY[_direction];
 		
-		g.drawImage(_shadow.getImage(direction(), t),
-				_pos[0] - w, (int)(_pos[1] - 0.85*h), w * 2, h * 2, null);
-		g.drawImage(_srcimg.getImage(direction(), t),
-				_pos[0] - w, _pos[1] - h, w * 2, h * 2, null);
+		int w = (int)(_srcimg.w * _scale);
+		int h = (int)(_srcimg.h * _scale);
+		int sy = (int)(_shadow_y * _scale);
+		
+		g.drawImage(_shadow.getImage(x, y),
+				_pos[0] - w/2, _pos[1] - h/2 + sy, w, h, null);
+		g.drawImage(_srcimg.getImage(x, y),
+				_pos[0] - w/2, _pos[1] - h/2 + _z, w, h, null);
+	}
+	
+	@Override
+	public void start(int duration) {
+		long currTime = System.currentTimeMillis();
+		_stopTime = currTime + duration;		
+		_timer.start();
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		super.actionPerformed(e);
+		update();
 
+		if (_animation_mode == "walking") {
+		} else if (_animation_mode == "jumping") {
+			_z += (int) (_dz * _delay / 1000d * _scale);
+			if (_z > 0) {
+				_z = 0;
+				_dz = 0d;
+				stop();
+				_animation_mode = "walking";
+			} else {
+				_dz += _srcimg.h;
+			}
+		}
 	}
 
 	@Override
 	public void update() {
-		double dt = 1 / _fps;
+		double dt = _delay / 1000d;
 		_pos[0] += _vel[0] * dt;
 		_pos[1] += _vel[1] * dt;		
 	}
+
 	@Override
 	public void countup() {
-		_timing ++;
-	}
+		_timing++;
+	}	
 }

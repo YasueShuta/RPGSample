@@ -1,6 +1,6 @@
 package animation;
 
-public interface IMovable extends IDrawable {
+public interface IMovable extends IAnimation {
 	String[] DIRECTIONS = {"down", "left", "up", "right"};
 	String[] STATES = {"idle", "walk"};
 
@@ -14,16 +14,28 @@ public interface IMovable extends IDrawable {
 	double[] velocity();
 	void velocity(double vx, double vy);
 	
+	void move(int dx, int dy);
+	void move(int dx, int dy, double speed);
+	void move(int dx, int dy, int duration);
+	
 	void down(int d);
 	void left(int d);
 	void up(int d);
 	void right(int d);
-	void stop();
+	
+	void wait(int duration);
+	void randomWalk();
+	void randomWalk(int d);
+	void jump();
+	
 	void home();
 	void home(int px, int py);
 		
+	void forward(int d);
+	void back(int d);
 	void turnLeft();
 	void turnRight();
+	void turn(int duration, boolean clockwise);
 	
 	void update();
 	void countup();
