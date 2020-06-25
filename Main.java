@@ -51,7 +51,58 @@ class Main {
     };
     app.run();
   }
+
+  static void enshu11_3a() {
+    // 確率を考慮
+    DemoGacha app = new DemoGacha("Demo") {
+      ArrayList<Double> _probs = new ArrayList<>();
+      double _totalProb = 0.0;
+
+      @Override
+      public void initHeroes() {
+    		MoveHandle m;
+     		m = new MoveHandle(
+				  CharaImageFile.getFilename(CharaImageFile.KING),
+				  ShadowImageFile.getFilename(ShadowImageFile.DEFAULT),
+				  w/2, h/2);
+		    setGachaHero(m, 1);
+
+    		m = new MoveHandle(
+		  		CharaImageFile.getFilename(CharaImageFile.PRIEST_FEMALEa),
+			  	ShadowImageFile.getFilename(ShadowImageFile.DEFAULT),
+				  w/2, h/2);
+		    setGachaHero(m, 2);
+
+    		m = new MoveHandle(
+		  		CharaImageFile.getFilename(CharaImageFile.CATb),
+			  	ShadowImageFile.getFilename(ShadowImageFile.ANIMAL),
+				  w/2, h/2);
+		    setGachaHero(m, 3);
+      }
+
+      public void setGachaHero(MoveHandle m, double p) {
+        setGachaHero(m);
+        _probs.add(p);
+        _totalProb += p;
+      }
+
+      public void choice() {
+        double d = rd.nextDouble(); // 0.0~1.0
+        d *= _totalProb;            // 0.0~_totalProb
+
+        double sum = 0.0;
+        for(int i=0; i<heroes.size(); i++) {
+          sum += _probs.get(i);
+          if (sum >= d) {
+            cast = heroes.get(i);
+            break;
+          }
+        }
+      }
+    };
+    app.run();
+  }
   public static void main(String[] args) {
-    enshu11_3();
+    enshu11_3a();
   }
 }
