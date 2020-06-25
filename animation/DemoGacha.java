@@ -19,26 +19,24 @@ public class DemoGacha extends AppBase {
 	public static void main(String[] args) {
 		// ウィンドウの作成
 		DemoGacha app = new DemoGacha("Demo");
-
-		// 移動可能なキャラクターの作成
-		app.initHeroes();
-
-
-		// 前景アニメーション
-		app.curtain = new CurtainAnimation(app.w, app.h);
-		app.curtain = new CurtainAnimation();
-		app.curtain.pos(app.w/2, app.h/3);
-		app.curtain.setTimer(200, 50);
-		app.curtain.addToApp(app);
-		app.curtain.state("close");
-		
-		// 背景
-		app.canvas.setBackground(BackgroundDrawer.CASTLE);
-		app.run();
+    app.run();
 	}
 	
 	@Override
 	public void run() {
+		// 移動可能なキャラクターの作成
+		initHeroes();
+
+		// 前景アニメーション
+		curtain = new CurtainAnimation();
+		curtain.pos(w/2, h/3);
+		curtain.setTimer(200, 50);
+		curtain.addToApp(this);
+		curtain.state("close");
+		
+		// 背景
+		canvas.setBackground(BackgroundDrawer.CASTLE);
+
 		super.run();
 		
 		while (true) {
