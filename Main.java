@@ -1,10 +1,9 @@
-import java.util.*;
 /* enshu10-1: TODO */
-//import animation.*;
+import animation.*;
 
 class Main {
   public static void main(String[] args) {
     /* enshu10-1: TODO */
-    //DemoWindow.main(args);
+    DemoWindow.main(args);
   }
 }
