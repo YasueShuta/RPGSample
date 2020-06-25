@@ -43,8 +43,8 @@ class Main {
 		    setGachaHero(m);
 
     		m = new MoveHandle(
-		  		CharaImageFile.getFilename(CharaImageFile.CATb),
-			  	ShadowImageFile.getFilename(ShadowImageFile.ANIMAL),
+		  		CharaImageFile.getFilename(CharaImageFile.BOSS),
+			  	ShadowImageFile.getFilename(ShadowImageFile.LARGE),
 				  w/2, h/2);
 		    setGachaHero(m);
       }
@@ -98,11 +98,15 @@ class Main {
             break;
           }
         }
+
+        if (cast == null) return;
+     		cast.direction("right");
+        cast.setVisible(true);
       }
     };
     app.run();
   }
   public static void main(String[] args) {
-    enshu11_3a();
+    enshu11_3();
   }
 }

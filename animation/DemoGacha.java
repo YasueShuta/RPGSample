@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class DemoGacha extends AppBase {
-	CurtainAnimation curtain;
-	MoveHandle cast;
-	ArrayList<MoveHandle> heroes = new ArrayList<>();
-	Random rd = new Random();
+	protected CurtainAnimation curtain;
+	protected MoveHandle cast;
+	protected ArrayList<MoveHandle> heroes = new ArrayList<>();
+	protected Random rd = new Random();
 	
 	public DemoGacha(String title) {
 		super(640, 580, title);

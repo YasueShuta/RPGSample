@@ -9,35 +9,41 @@ import javax.imageio.ImageIO;
 public class AnimSourceImage extends SourceImage {
 	int _nx, _ny;
 	int _cursor = 0;
-	protected BufferedImage[] _src;
+	protected BufferedImage[] _animSrc;
 
 	public AnimSourceImage(String filename) {
-		this(640, 480, filename);
-	}
+    super(filename);
+  }
 	public AnimSourceImage(int w, int h, String filename) {
-		this.w = w > 0 ? w : 640;
-		this.h = h > 0 ? h : 480;
-		
-		BufferedImage buf;
-		try {
-			buf = ImageIO.read(new File(filename));
-			
-			_nx = buf.getWidth() / w;
-			_ny = buf.getHeight() / h;
+    this(filename);
 
-			setSource(buf);
-		} catch (IOException e) {
-			System.err.println("Resource File: " + filename);
-			e.printStackTrace();
-		}		
+    w = w > 0 ? w : 640;
+    h = h > 0 ? h : 480;
+
+    setAnimSource(this.w / w, this.h / h);
+		
+    this.w = w;
+    this.h = h;
 	}
 	
-	protected void setSource(BufferedImage buf) {
-		_src = new BufferedImage[_nx * _ny];
-		splitBuffer(buf, _src, 0, _nx, _ny);
+	public void setAnimSource(int nx, int ny) {
+    if (nx == 0 || ny == 0) return;
+    _nx = nx;
+    _ny = ny;
+		_animSrc = new BufferedImage[_nx * _ny];
+    splitBuffer();
 	}
 
+  protected void splitBuffer() {
+    w = _src.getWidth() / _nx;
+    h = _src.getHeight() / _ny;
+		splitBuffer(_src, _animSrc, 0, _nx, _ny);
+  }
+
 	protected void splitBuffer(BufferedImage buf, BufferedImage[] out, int offset, int nx, int ny) {
+    int w = buf.getWidth() / nx;
+    int h = buf.getHeight() / ny;
+
 		for (int i=0; i<ny; i++) {
 			for (int j=0; j<nx; j++) {
 				out[i*nx + j + offset] = buf.getSubimage(w*j, h*i, w, h);
@@ -47,11 +53,11 @@ public class AnimSourceImage extends SourceImage {
 	
 	@Override
 	public BufferedImage getImage() {
+    if (_nx == 0) return super.getImage();
 		return getImage(_cursor % _nx, _cursor / _nx);
 	}
 	public BufferedImage getImage(int x, int y) {
-//		System.out.println(x + ", " + y);
-		return _src[y * _nx + x];
+    if (_animSrc == null) return _src;
+		return _animSrc[y * _nx + x];
 	}
-
 }
