@@ -52,6 +52,10 @@ public abstract class Character
     Printer.println(level + "上がった.");
     _level += level;
   }
+
+  public MoveHandle getMoveHandle() {
+    return _handle;
+  }
 	
 	// ここからPlayableAdapterSampleのメソッドのコピー
   private void initHandle(String srcname, String shadowname, boolean playable) {

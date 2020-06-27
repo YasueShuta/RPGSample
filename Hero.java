@@ -28,12 +28,18 @@ public class Hero
   public static Hero create(String name, int age, int level, boolean is_male, String variation) {
     return create(name, age, level, is_male, variation, false);
   }
+  public static Hero create(String name, int age, int level, int hp, int mp, boolean is_male, String variation) {
+    return create(name, age, level, hp, mp, is_male, variation, false);
+  }
   public static Hero create(String name, int age, int level, boolean is_male, String variation, boolean playable) {
+    return create(name, age, level, 100, 0, is_male, variation, playable);
+  }
+  public static Hero create(String name, int age, int level, int hp, int mp, boolean is_male, String variation, boolean playable) {
     String srcname = is_male ? CharaImageFile.FIGHTER_MALE : CharaImageFile.FIGHTER_FEMALE;
     srcname += variation;
     String shadowname = ShadowImageFile.DEFAULT;
 
-    return new Hero(name, age, level, 100, 0, srcname, shadowname, playable);
+    return new Hero(name, age, level, hp, mp, srcname, shadowname, playable);
   }
 }
 

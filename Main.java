@@ -30,16 +30,18 @@ class Main {
       @Override
       public void initHeroes() {
     		MoveHandle m;
-     		m = new MoveHandle(
-				  CharaImageFile.getFilename(CharaImageFile.KING),
-				  ShadowImageFile.getFilename(ShadowImageFile.DEFAULT),
-				  w/2, h/2);
+     		Hero hime = new Hero("Hime", 19, 1, 100, 0,
+          CharaImageFile.FIGHTER_FEMALEe, // srcname
+          ShadowImageFile.DEFAULT);       // shadowname
+        m = hime.getMoveHandle();
+        m.home(w/2, h/2);
 		    setGachaHero(m);
 
-    		m = new MoveHandle(
-		  		CharaImageFile.getFilename(CharaImageFile.PRIEST_FEMALEa),
-			  	ShadowImageFile.getFilename(ShadowImageFile.DEFAULT),
-				  w/2, h/2);
+    		Wizard taro = Wizard.create("Taro", 18, 1, 100, 150,
+          true,                           // is_male
+          "");                            // variation
+        m = taro.getMoveHandle();
+        m.home(w/2, h/2);
 		    setGachaHero(m);
 
     		m = new MoveHandle(

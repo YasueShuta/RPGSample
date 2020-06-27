@@ -28,12 +28,18 @@ public class Wizard
   public static Wizard create(String name, int age, int level, boolean is_male, String variation) {
     return create(name, age, level, is_male, variation, false);
   }
+  public static Wizard create(String name, int age, int level, int hp, int mp, boolean is_male, String variation) {
+    return create(name, age, level, hp, mp, is_male, variation, false);
+  }
   public static Wizard create(String name, int age, int level, boolean is_male, String variation, boolean playable) {
+    return create(name, age, level, 100, 150, is_male, variation, playable);
+  }
+  public static Wizard create(String name, int age, int level, int hp, int mp, boolean is_male, String variation, boolean playable) {
     String srcname = is_male ? CharaImageFile.WIZARD_MALE : CharaImageFile.WIZARD_FEMALE;
     srcname += variation;
     String shadowname = ShadowImageFile.DEFAULT;
 
-    return new Wizard(name, age, level, 50, 100, srcname, shadowname, playable);
+    return new Wizard(name, age, level, hp, mp, srcname, shadowname, playable);
   }
 }
 
