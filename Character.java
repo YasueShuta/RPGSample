@@ -211,5 +211,6 @@ public abstract class Character
 			return (PlayableHandle)_handle;
 		}
 		return null;
-	}
+  }
+  /** HERE **/
 }
