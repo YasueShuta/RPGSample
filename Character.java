@@ -299,4 +299,12 @@ public abstract class Character
 	public void back(int d) {
 		_handle.back(d);
 	}
+  @Override
+  public void setTimer(int delay) {
+    _handle.setTimer(delay);
+  }
+  @Override
+  public void setTimer(int delay, ActionListener lsnr) {
+    _handle.setTimer(delay, lsnr);
+  }
 }

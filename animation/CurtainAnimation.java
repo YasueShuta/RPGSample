@@ -3,6 +3,7 @@ package animation;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class CurtainAnimation
 	implements IAnimation
@@ -24,12 +25,20 @@ public class CurtainAnimation
 		_openingCurtain.setVisible(false);
 	}
 	
+  @Override
 	public void setTimer(int delay) {
-		setTimer(delay, delay);
+		setTimer(delay, this);
 	}
-	public void setTimer(int delay_open, int delay_close) {
-		_openingCurtain.setTimer(delay_open, this);
-		_closingCurtain.setTimer(delay_close, this);
+  @Override
+  public void setTimer(int delay, ActionListener lsnr) {
+    setTimer(delay, delay, lsnr, lsnr);
+  }
+  public void setTimer(int delay_open, int delay_close) {
+    setTimer(delay_open, delay_close, this, this);
+  }
+	public void setTimer(int delay_open, int delay_close, ActionListener lsnr_open, ActionListener lsnr_close) {
+		_openingCurtain.setTimer(delay_open, lsnr_open);
+		_closingCurtain.setTimer(delay_close, lsnr_close);
 	}
 	
 	public void addToApp(AppBase app) {

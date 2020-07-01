@@ -24,9 +24,11 @@ public class AnimHandle
 		_srcimg = new AnimSourceImage(w, h, filename);
 	}
 	
+  @Override
 	public void setTimer(int delay) {
 		setTimer(delay, this);
 	}
+  @Override
 	public void setTimer(int delay, ActionListener lsnr) {
 		_delay = delay;
 		_timer = new Timer(delay, lsnr);

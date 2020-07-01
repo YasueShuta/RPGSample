@@ -5,8 +5,8 @@ import java.util.Random;
 
 public class DemoGacha extends AppBase {
 	protected CurtainAnimation curtain;
-	protected MoveHandle cast;
-	protected ArrayList<MoveHandle> heroes = new ArrayList<>();
+	protected IMovable cast;
+	protected ArrayList<IMovable> heroes = new ArrayList<>();
 	protected Random rd = new Random();
 	
 	public DemoGacha(String title) {
@@ -93,7 +93,7 @@ public class DemoGacha extends AppBase {
 		setGachaHero(m);
 	}
 
-	public void setGachaHero(MoveHandle m) {
+	public void setGachaHero(IMovable m) {
 		m.setVisible(false);
 		m.scale(5d);
 		m.setTimer(200);
