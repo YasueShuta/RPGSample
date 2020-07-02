@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class DemoGacha extends AppBase {
-	protected CurtainAnimation curtain;
-	protected IMovable cast;
-	protected ArrayList<IMovable> heroes = new ArrayList<>();
-	protected Random rd = new Random();
+	CurtainAnimation curtain;
+	MoveHandle cast;
+	ArrayList<MoveHandle> heroes = new ArrayList<>();
+	Random rd = new Random();
 	
 	public DemoGacha(String title) {
 		super(640, 580, title);
@@ -19,15 +19,18 @@ public class DemoGacha extends AppBase {
 	public static void main(String[] args) {
 		// ウィンドウの作成
 		DemoGacha app = new DemoGacha("Demo");
-    app.run();
-	}
-	
-	@Override
-	public void run() {
+        // ゲーム開始
+        app.run();
+    }
+
+    @Override
+    public void run() {
 		// 移動可能なキャラクターの作成
 		initHeroes();
 
+
 		// 前景アニメーション
+		curtain = new CurtainAnimation(w, h);
 		curtain = new CurtainAnimation();
 		curtain.pos(w/2, h/3);
 		curtain.setTimer(200, 50);
@@ -37,6 +40,7 @@ public class DemoGacha extends AppBase {
 		// 背景
 		canvas.setBackground(BackgroundDrawer.CASTLE);
 
+        // 描画開始
 		super.run();
 		
 		while (true) {
@@ -93,7 +97,7 @@ public class DemoGacha extends AppBase {
 		setGachaHero(m);
 	}
 
-	public void setGachaHero(IMovable m) {
+	public void setGachaHero(MoveHandle m) {
 		m.setVisible(false);
 		m.scale(5d);
 		m.setTimer(200);

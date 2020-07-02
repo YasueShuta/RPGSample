@@ -38,17 +38,14 @@ public class MoveHandle extends AnimHandle implements IMovable {
 		this(filename, shadowname, 0, 0);
 	}
 	public MoveHandle(String filename, String shadowname, int x, int y) {
-		this(filename, shadowname, 3, 4, x, y);
+		this(filename, shadowname, 32, 32, x, y);
 	}
-	public MoveHandle(String filename, String shadowname, int nx, int ny, int x, int y) {
-		super(filename);
-    _srcimg.setAnimSource(nx, ny);
-		_shadow = new AnimSourceImage(shadowname);
-    _shadow.setAnimSource(nx, ny);
-
+	public MoveHandle(String filename, String shadowname, int w, int h, int x, int y) {
+		super(w, h, filename);
+		_shadow = new AnimSourceImage(w, h, shadowname);
 		_px = x;
 		_py = y;
-		_shadow_y = (int) (0.075 * _srcimg.h);
+		_shadow_y = (int) (0.075 * h);
 		scale(2d);
 		setTimer(200);
 		home();

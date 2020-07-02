@@ -3,7 +3,6 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.ActionListener;
 
 public class PlayableAdapterSample implements IMovable, IPlayable {
 
@@ -267,14 +266,4 @@ public class PlayableAdapterSample implements IMovable, IPlayable {
 	public void back(int d) {
 		_handle.back(d);
 	}
-
-  // animation v0.0.4で追加
-  @Override
-  public void setTimer(int delay) {
-    _handle.setTimer(delay);
-  }
-  @Override
-  public void setTimer(int delay, ActionListener lsnr) {
-    _handle.setTimer(delay, lsnr);
-  }
 }
