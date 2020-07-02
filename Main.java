@@ -3,6 +3,8 @@ import animation.*;
 
 class Main {
     public static void main(String[] args) {
+        Person player = new Person("AAAA", 20);
+
         DemoGacha app = new DemoGacha("Demo") {
             @Override
             public void initHeroes() {
@@ -25,8 +27,23 @@ class Main {
                     ShadowImageFile.getFilename(ShadowImageFile.ANIMAL),
                     w/2, h/2);
                 setGachaHero(m);
+
+                taro.hello_to(hime);
+            }
+
+            @Override
+            public void choice() {
+                super.choice();
+                Printer.clear();
+                Printer.println("Success!");
+                if (cast instanceof Person) {
+                    ((Person)cast).hello(player);
+                }
             }
         };
+        Printer.setTextWindow(app.textWindow);
+        Printer.clear();
+        Printer.println("Hello!\nLet's Gacha!");
         app.run();        
     }
 }

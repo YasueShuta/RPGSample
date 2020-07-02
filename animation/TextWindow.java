@@ -84,7 +84,10 @@ public class TextWindow extends JPanel {
 		String s = _label.getText();
 		return s.replaceAll("</?html>", "").replaceAll("<br>", "\n");
 	}
-	public void print_(Object msg) {
+    public void print_(Object msg) {
+        print_(msg, false);
+    }
+	public void print_(Object msg, boolean end) {
 		if (_clearFlag) {
 			clear();
 			_clearFlag = false;
@@ -92,14 +95,14 @@ public class TextWindow extends JPanel {
 		String s = getText();
 		s += msg;
 		setText(s);
-		System.out.print(s);
+        _clearFlag = end;
+		//System.out.print(s);
 	}
 	public void println(Object msg) {
-		println(msg, true);
+		println(msg, false);
 	}
-	public void println(Object msg, boolean clear) {
-		print_(msg + "\n");		
-		_clearFlag = clear;
+	public void println(Object msg, boolean end) {
+		print_(msg + "\n", end);
 	}
 	public void clear() {
 		_label.setText("");
