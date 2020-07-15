@@ -1,7 +1,10 @@
 import animation.*;
+import java.util.*;
 
 public class MyApp extends DemoGacha {
     Person player = new Person("AAAA", 20);
+    ArrayList<Double> _probs = new ArrayList<>(); // 確率のリスト
+    double _totalProb;
 
     public MyApp() {
         super("My Gacha");
