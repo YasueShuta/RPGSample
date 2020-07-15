@@ -22,7 +22,7 @@ public abstract class Character
 	protected boolean _playable;
 
     // GachaSampleで追加
-    protected String _phrase;
+    protected String _phrase = "Hello, %name%.";
     protected int _rarity = 1;
 
     /* コンストラクタ */
@@ -68,6 +68,21 @@ public abstract class Character
     public void setPhrase(String phrase) {
         _phrase = phrase;
     }
+    public String getRarity() {
+        switch (_rarity) {
+        case 5:
+            return "Legend";
+        case 4:
+            return "Ultra Rare";
+        case 3:
+            return "Super Rare";
+        case 2:
+            return "Rare";
+        case 1:
+        default:
+            return "Normal";
+        }
+    }
     public double getProb() {
         switch (_rarity) {
         case 1:
@@ -87,9 +102,9 @@ public abstract class Character
         print(_phrase);
     }
     public void hello(Person other) {
-        print(_phrase.replace("%name%", other.name));
+        print(_phrase.replace("%name%", other.name()));
     }
-    
+
 	// ここからPlayableAdapterSampleのメソッドのコピー
     private void initHandle(String srcname, String shadowname, boolean playable) {
 		// IMovable, IPlayable適用のための初期化

@@ -71,7 +71,7 @@ public abstract class AppBase extends JFrame implements Runnable {
 		}
 		
 		// TextWindowのインスタンスを生成
-		textWindow = new TextWindow(w - 380, 0, 18);
+		textWindow = new TextWindow(w - 380, 0, 12);
 		int sub_h = textWindow.getSize().height;
 		
 		// CommandWindowのインスタンスを生成
