@@ -14,99 +14,51 @@ public abstract class Character
     extends Person
     implements IMovable, IPlayable
 {
-    /* プロパティ */
-    public String _class;
-    public int _level;
+  /* プロパティ */
+  public String _class;
+  public int _level;
 
 	protected MoveHandle _handle;
 	protected boolean _playable;
 
-    // GachaSampleで追加
-    protected String _phrase = "Hello, %name%.";
-    protected int _rarity = 1;
-
-    /* コンストラクタ */
-    public Character(String name, int age, String _class, int level) {
-        this(name, age, _class, level, "001", "001");
-    }
-    public Character(String name, int age, String _class, int level, String srcname, String shadowname) {
-        this(name, age, _class, level, srcname, shadowname, false);
-    }
+  /* コンストラクタ */
+  public Character(String name, int age, String _class, int level) {
+    this(name, age, _class, level, "001", "001");
+  }
+  public Character(String name, int age, String _class, int level, String srcname, String shadowname) {
+    this(name, age, _class, level, srcname, shadowname, false);
+  }
  	public Character(String name, int age, String _class, int level, String srcname, String shadowname, boolean playable) {
-        super(name, age);
-        this._class = _class;
-        _level = level;
+    super(name, age);
+    this._class = _class;
+    _level = level;
 
-        initHandle(CharaImageFile.getFilename(srcname), ShadowImageFile.getFilename(shadowname), playable);
+    initHandle(CharaImageFile.getFilename(srcname), ShadowImageFile.getFilename(shadowname), playable);
 	}
 
  
-    /* 公開メソッド */
-    public String _class() {
-        return _class;
-    }
-    public int level() {
-        return _level;
-    }
-    public void levelup() {
-        levelup(1);
-    }
-    public void levelup(int level) {
-        Printer.print(_name + "のレベルが");
-        Printer.println(level + "上がった.");
-        _level += level;
-    }
+  /* 公開メソッド */
+  public String _class() {
+    return _class;
+  }
+  public int level() {
+    return _level;
+  }
+  public void levelup() {
+    levelup(1);
+  }
+  public void levelup(int level) {
+    Printer.print(_name + "のレベルが");
+    Printer.println(level + "上がった.");
+    _level += level;
+  }
 
-    public MoveHandle getMoveHandle() {
-        return _handle;
-    }
+  public MoveHandle getMoveHandle() {
+    return _handle;
+  }
 	
-    public void setRarity(int rarity) {
-        if (rarity <= 0 || rarity > 5) return;
-        _rarity = rarity;
-    }
-    public void setPhrase(String phrase) {
-        _phrase = phrase;
-    }
-    public String getRarity() {
-        switch (_rarity) {
-        case 5:
-            return "Legend";
-        case 4:
-            return "Ultra Rare";
-        case 3:
-            return "Super Rare";
-        case 2:
-            return "Rare";
-        case 1:
-        default:
-            return "Normal";
-        }
-    }
-    public double getProb() {
-        switch (_rarity) {
-        case 1:
-            return 5d;
-        case 2:
-            return 3d;
-        case 3:
-            return 1d;
-        case 4:
-            return 0.5;
-        case 5:
-            return 0.1;
-        }
-        return 0.0;
-    }
-    public void hello() {
-        print(_phrase);
-    }
-    public void hello(Person other) {
-        print(_phrase.replace("%name%", other.name()));
-    }
-
 	// ここからPlayableAdapterSampleのメソッドのコピー
-    private void initHandle(String srcname, String shadowname, boolean playable) {
+  private void initHandle(String srcname, String shadowname, boolean playable) {
 		// IMovable, IPlayable適用のための初期化
 		_playable = playable;
 		
@@ -115,7 +67,7 @@ public abstract class Character
 		} else {
 			_handle = new MoveHandle(srcname, shadowname);
 		}
-    }
+  }
 
 	@Override
 	public void draw(Graphics g) {
